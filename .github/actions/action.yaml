@@ -1,0 +1,22 @@
+name: Using Actions
+description: "My custom action"
+
+inputs:
+  work-dir:
+    description: Working work-dir
+    default: '.'
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{env.NODE_VERSION}}
+    - name: Install Dependencies
+      shell: bash
+      run: npm ci
+    - name: Run Unit Tests
+      run: npm run test
+      working-directory:  ${{ínputs.work-dir}}
+      shell: bash
